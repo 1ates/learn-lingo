@@ -1,0 +1,21 @@
+:root {
+  /* Primary */
+  --color-primary: #F4C550;
+  --color-primary-light: #FBE9BA;
+
+  /* Sage/Green */
+  --color-sage: #9FBAAE;
+  --color-sage-light: #CBDED3;
+
+  /* Blue */
+  --color-blue: #9FB7CE;
+  --color-blue-light: #BFD6EA;
+
+  /* Salmon/Pink */
+  --color-salmon: #E0A39A;
+  --color-salmon-light: #F2C0BD;
+
+  /* Peach/Orange */
+  --color-peach: #F0AA8D;
+  --color-peach-light: #F4C8BA;
+}
