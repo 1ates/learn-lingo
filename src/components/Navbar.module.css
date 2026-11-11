@@ -1,0 +1,61 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-primary-light, #FBE9BA);
+  border-bottom: 2px solid var(--color-primary, #F4C550);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navLinks a:hover {
+  color: var(--color-primary, #F4C550);
+}
+
+.authBtn {
+  background-color: var(--color-primary, #F4C550);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.authBtn:hover {
+  background-color: #e0b03e;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userEmail {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2c3e50;
+}

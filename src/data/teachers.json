@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "name": "Elena",
+    "surname": "Gilbert",
+    "languages": ["English", "French"],
+    "levels": ["Beginner", "Intermediate", "Advanced"],
+    "rating": 4.9,
+    "pricePerHour": 25,
+    "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "bio": "Experienced language teacher with a passion for interactive learning."
+  },
+  {
+    "id": "2",
+    "name": "Carlos",
+    "surname": "Santana",
+    "languages": ["Spanish", "English"],
+    "levels": ["Beginner", "Advanced"],
+    "rating": 4.8,
+    "pricePerHour": 20,
+    "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "bio": "Native Spanish speaker helping you achieve fluency fast."
+  },
+  {
+    "id": "3",
+    "name": "Mei",
+    "surname": "Ling",
+    "languages": ["Chinese", "Mandarin", "English"],
+    "levels": ["All Levels"],
+    "rating": 5.0,
+    "pricePerHour": 30,
+    "avatarUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    "bio": "Certified Mandarin instructor with 8+ years of experience."
+  }
+]
