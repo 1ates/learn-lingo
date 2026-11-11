@@ -15,9 +15,10 @@ export interface Teacher {
 
 interface TeacherCardProps {
   teacher: Teacher;
+  onBook: (teacher: Teacher) => void;
 }
 
-export const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
+export const TeacherCard: React.FC<TeacherCardProps> = ({ teacher, onBook }) => {
   return (
     <div className={styles.card}>
       <img src={teacher.avatarUrl} alt={`${teacher.name} ${teacher.surname}`} className={styles.avatar} />
@@ -26,7 +27,7 @@ export const TeacherCard: React.FC<TeacherCardProps> = ({ teacher }) => {
         <p className={styles.bio}>{teacher.bio}</p>
         <div className={styles.footer}>
           <span className={styles.price}>${teacher.pricePerHour} / hr</span>
-          <button className={styles.bookBtn}>Book Lesson</button>
+          <button onClick={() => onBook(teacher)} className={styles.bookBtn}>Book Lesson</button>
         </div>
       </div>
     </div>
