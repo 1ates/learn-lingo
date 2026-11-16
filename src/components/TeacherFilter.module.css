@@ -36,3 +36,11 @@
 .select:focus {
   border-color: #2c3e50;
 }
+
+@media (max-width: 600px) {
+  .filterContainer {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+}

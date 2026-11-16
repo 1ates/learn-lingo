@@ -2,60 +2,60 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--color-primary-light, #FBE9BA);
-  border-bottom: 2px solid var(--color-primary, #F4C550);
+  padding: 1.25rem 2rem;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
   font-weight: 700;
   font-size: 1.25rem;
-  color: #2c3e50;
+  color: #1a252f;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .navLinks {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  align-items: center;
 }
 
 .navLinks a {
   text-decoration: none;
-  color: #2c3e50;
-  font-weight: 500;
-  transition: color 0.2s;
+  color: #1a252f;
+  font-weight: 400;
+  font-size: 1rem;
 }
 
-.navLinks a:hover {
-  color: var(--color-primary, #F4C550);
-}
-
-.authBtn {
-  background-color: var(--color-primary, #F4C550);
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.authBtn:hover {
-  background-color: #e0b03e;
-}
-
-.userMenu {
+.navActions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.userEmail {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #2c3e50;
+.loginLink {
+  text-decoration: none;
+  color: #1a252f;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.registerBtn {
+  background-color: #1a252f;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { TeacherCard, Teacher } from './components/TeacherCard';
 import { TeacherFilter } from './components/TeacherFilter';
@@ -6,6 +6,8 @@ import { BookingModal } from './components/BookingModal';
 import { Dashboard } from './components/Dashboard';
 import { HowItWorks } from './components/HowItWorks';
 import { Footer } from './components/Footer';
+import { StatsBar } from './components/StatsBar';
+import { migrateTeachersData } from './services/firebase';
 import teachersData from './data/teachers.json';
 import styles from './App.module.css';
 
@@ -16,6 +18,18 @@ export default function App() {
   const [selectedLevel, setSelectedLevel] = useState('');
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  // Automatically synchronize JSON data to Firestore on mount
+  React.useEffect(() => {
+    const initData = async () => {
+      try {
+        await migrateTeachersData(teachers);
+      } catch (err) {
+        console.error('Migration failed:', err);
+      }
+    };
+    initData();
+  }, []);
 
   const filteredTeachers = teachers.filter((teacher) => {
     const matchesLanguage = selectedLanguage
@@ -39,23 +53,25 @@ export default function App() {
         {view === 'home' ? (
           <>
             <section className={styles.hero}>
-              <h1>Find Your Perfect Language Tutor</h1>
-              <p>Connect with expert native speakers and accelerate your language learning journey.</p>
-              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem' }}>
+              <div className={styles.heroText}>
+                <h1>Unlock your potential with the best <span style={{backgroundColor: 'var(--color-primary-light)', padding: '0 0.5rem', borderRadius: '4px'}}>language</span> tutors</h1>
+                <p>Embark on an Exciting Language Journey with Expert Language Tutors: Elevate your language proficiency to new heights by connecting with highly qualified and experienced tutors.</p>
                 <button
-                  onClick={() => setView('dashboard')}
-                  style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderRadius: '4px', border: '1px solid #ccc' }}
+                  onClick={() => setView('home')} // Temporarily remains on home or can lead to Teachers section
+                  style={{ padding: '1rem 2rem', borderRadius: '12px', border: 'none', backgroundColor: 'var(--color-primary)', color: '#1a252f', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}
                 >
-                  View My Bookings
-                </button>
-                <button
-                  onClick={() => setView('how-it-works')}
-                  style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderRadius: '4px', backgroundColor: 'var(--color-primary)', border: 'none', fontWeight: 'bold' }}
-                >
-                  How It Works
+                  Get started
                 </button>
               </div>
+              <div className={styles.heroImage}>
+                {/* TODO: Add illustration */}
+                <div style={{ backgroundColor: 'var(--color-peach-light)', borderRadius: '20px', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  [Illustration]
+                </div>
+              </div>
             </section>
+
+            <StatsBar />
 
             <TeacherFilter
               selectedLanguage={selectedLanguage}

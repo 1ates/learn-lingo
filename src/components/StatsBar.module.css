@@ -1,0 +1,23 @@
+.statsBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+  border: 2px dashed var(--color-primary);
+  border-radius: 20px;
+  margin-bottom: 3rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.label {
+  color: #666;
+}

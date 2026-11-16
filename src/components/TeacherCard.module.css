@@ -2,41 +2,86 @@
   display: flex;
   flex-direction: column;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  border: 1px solid var(--color-sage-light, #CBDED3);
-  transition: transform 0.2s;
+  border: 1px solid #edf2f7;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-sage, #9FBAAE);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
 }
 
 .avatar {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .avatar {
+  transform: scale(1.05);
+}
+
+.ratingBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #2c3e50;
 }
 
 .content {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .name {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a252f;
   margin: 0;
 }
 
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  background: var(--color-primary-light, #FBE9BA);
+  color: #8a6d24;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+}
+
 .bio {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
 }
 
 .footer {
@@ -44,23 +89,45 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
 }
 
-.price {
-  font-weight: 700;
-  color: #2c3e50;
+.priceTag {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.amount {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1a252f;
+  line-height: 1;
+}
+
+.unit {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 .bookBtn {
-  background-color: var(--color-sage, #9FBAAE);
-  color: white;
+  background-color: var(--color-primary);
+  color: #1a252f;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
-  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .bookBtn:hover {
-  background-color: #839e92;
+  background-color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
+.bookBtn:active {
+  transform: scale(0.95);
 }

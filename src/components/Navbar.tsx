@@ -10,23 +10,20 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <nav className={styles.navbar}>
-        <a href="/" className={styles.logo}>LearnLingo 🎓</a>
+        <a href="/" className={styles.logo}>
+          <img src="/logo.svg" alt="LearnLingo" />
+          LearnLingo
+        </a>
         <ul className={styles.navLinks}>
-          <li><a href="/">Find Tutors</a></li>
-          <li><a href="/how-it-works">How It Works</a></li>
-          <li>
-            {user ? (
-              <div className={styles.userMenu}>
-                <span className={styles.userEmail}>{user.email}</span>
-                <button onClick={() => signOut()} className={styles.authBtn}>Sign Out</button>
-              </div>
-            ) : (
-              <button onClick={() => setIsModalOpen(true)} className={styles.authBtn}>
-                Sign In
-              </button>
-            )}
-          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/teachers">Teachers</a></li>
         </ul>
+        <div className={styles.navActions}>
+          <a href="/login" className={styles.loginLink}>→ Log in</a>
+          <button onClick={() => setIsModalOpen(true)} className={styles.registerBtn}>
+            Registration
+          </button>
+        </div>
       </nav>
       <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>

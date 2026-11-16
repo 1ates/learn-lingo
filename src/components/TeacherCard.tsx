@@ -21,13 +21,22 @@ interface TeacherCardProps {
 export const TeacherCard: React.FC<TeacherCardProps> = ({ teacher, onBook }) => {
   return (
     <div className={styles.card}>
-      <img src={teacher.avatarUrl} alt={`${teacher.name} ${teacher.surname}`} className={styles.avatar} />
+      <div className={styles.imageWrapper}>
+        <img src={teacher.avatarUrl} alt={`${teacher.name} ${teacher.surname}`} className={styles.avatar} />
+        <div className={styles.ratingBadge}>⭐ {teacher.rating}</div>
+      </div>
       <div className={styles.content}>
-        <h3 className={styles.name}>{teacher.name} {teacher.surname} ⭐️ {teacher.rating}</h3>
+        <h3 className={styles.name}>{teacher.name} {teacher.surname}</h3>
+        <div className={styles.tags}>
+          {teacher.languages.map(lang => <span key={lang} className={styles.tag}>{lang}</span>)}
+        </div>
         <p className={styles.bio}>{teacher.bio}</p>
         <div className={styles.footer}>
-          <span className={styles.price}>${teacher.pricePerHour} / hr</span>
-          <button onClick={() => onBook(teacher)} className={styles.bookBtn}>Book Lesson</button>
+          <div className={styles.priceTag}>
+            <span className={styles.amount}>${teacher.pricePerHour}</span>
+            <span className={styles.unit}>/hr</span>
+          </div>
+          <button onClick={() => onBook(teacher)} className={styles.bookBtn}>Book Now</button>
         </div>
       </div>
     </div>
