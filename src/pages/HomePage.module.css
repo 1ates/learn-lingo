@@ -1,0 +1,201 @@
+:root {
+  --bg-yellow: #f8f9fa;
+  --hero-bg-yellow: #fbe9ba;
+  --accent-yellow: #f4c550;
+  --mac-start-yellow: #eeb055;
+  --mac-end-yellow: #d08f38;
+
+  --bg-green: #f4f8f6;
+  --hero-bg-green: #cbded3;
+  --accent-green: #9fbaae;
+  --mac-start-green: #7ea89b;
+  --mac-end-green: #5b8679;
+
+  --bg-blue: #f4f7fa;
+  --hero-bg-blue: #bfd6ea;
+  --accent-blue: #9fb7ce;
+  --mac-start-blue: #7e9ec2;
+  --mac-end-blue: #5a7ea6;
+
+  --bg-salmon: #fdf5f4;
+  --hero-bg-salmon: #f2c0bd;
+  --accent-salmon: #e0a39a;
+  --mac-start-salmon: #cd8680;
+  --mac-end-salmon: #a8625d;
+
+  --bg-peach: #fdf6f4;
+  --hero-bg-peach: #f4c8ba;
+  --accent-peach: #f0aa8d;
+  --mac-start-peach: #d89679;
+  --mac-end-peach: #b47153;
+}
+
+[data-theme="yellow"] {
+  --current-bg: var(--bg-yellow);
+  --current-hero-bg: var(--hero-bg-yellow);
+  --current-accent: var(--accent-yellow);
+  --current-mac-start: var(--mac-start-yellow);
+  --current-mac-end: var(--mac-end-yellow);
+}
+
+[data-theme="green"] {
+  --current-bg: var(--bg-green);
+  --current-hero-bg: var(--hero-bg-green);
+  --current-accent: var(--accent-green);
+  --current-mac-start: var(--mac-start-green);
+  --current-mac-end: var(--mac-end-green);
+}
+
+[data-theme="blue"] {
+  --current-bg: var(--bg-blue);
+  --current-hero-bg: var(--hero-bg-blue);
+  --current-accent: var(--accent-blue);
+  --current-mac-start: var(--mac-start-blue);
+  --current-mac-end: var(--mac-end-blue);
+}
+
+[data-theme="salmon"] {
+  --current-bg: var(--bg-salmon);
+  --current-hero-bg: var(--hero-bg-salmon);
+  --current-accent: var(--accent-salmon);
+  --current-mac-start: var(--mac-start-salmon);
+  --current-mac-end: var(--mac-end-salmon);
+}
+
+[data-theme="peach"] {
+  --current-bg: var(--bg-peach);
+  --current-hero-bg: var(--hero-bg-peach);
+  --current-accent: var(--accent-peach);
+  --current-mac-start: var(--mac-start-peach);
+  --current-mac-end: var(--mac-end-peach);
+}
+
+.homeMain {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  font-family: "Roboto", sans-serif;
+}
+
+.heroSection {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--current-bg, var(--bg-yellow));
+  color: #121417;
+  border-radius: 30px;
+  padding: 64px;
+  margin-bottom: 32px;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.textColumn {
+  flex: 1;
+  max-width: 540px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  color: #121417;
+}
+
+.highlight {
+  font-style: italic;
+  background: var(--current-accent, var(--accent-yellow));
+  color: #121417;
+  padding: 0 8px;
+  border-radius: 8px;
+}
+
+.description {
+  font-size: 16px;
+  color: #8a8a89;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.getStartedBtn {
+  background: var(--current-accent, var(--accent-yellow));
+  border: none;
+  padding: 18px 48px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 18px;
+  color: #121417;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s;
+}
+
+.getStartedBtn:hover {
+  opacity: 0.9;
+}
+
+.heroImageWrapper {
+  width: 568px;
+  height: 530px;
+  background: var(--current-hero-bg, var(--hero-bg-yellow));
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+
+.avatarImg {
+  width: 339px;
+  height: 339px;
+  object-fit: contain;
+  position: absolute;
+  top: 80px;
+  z-index: 2;
+}
+
+.macContainer {
+  width: 391px;
+  height: 304px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 3;
+}
+
+.statsSection {
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  color: #121417;
+  border: 1px solid #f0f0f0;
+  border-radius: 30px;
+  padding: 40px 64px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statNumber {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #8a8a89;
+  max-width: 100px;
+}

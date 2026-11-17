@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Dashboard.module.css';
 import { useAuth } from '../context/AuthContext';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { ref, get } from 'firebase/database';
 import { db } from '../services/firebase';
-import { useEffect, useState } from 'react';
 
 interface Booking {
   id: string;
@@ -12,6 +11,7 @@ interface Booking {
   time: string;
   hours: number;
   totalPrice: number;
+  userId: string;
 }
 
 export const Dashboard: React.FC = () => {
@@ -23,13 +23,21 @@ export const Dashboard: React.FC = () => {
     const fetchBookings = async () => {
       if (!user) return;
       try {
-        const q = query(collection(db, 'bookings'), where('userId', '==', user.uid));
-        const querySnapshot = await getDocs(q);
-        const bookingsData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Booking[];
-        setBookings(bookingsData);
+        const bookingsRef = ref(db, 'bookings');
+        const snapshot = await get(bookingsRef);
+        const userBookings: Booking[] = [];
+        if (snapshot.exists()) {
+          const val = snapshot.val();
+          Object.entries(val).forEach(([key, b]: [string, any]) => {
+            if (b.userId === user.uid) {
+              userBookings.push({
+                id: key,
+                ...b,
+              });
+            }
+          });
+        }
+        setBookings(userBookings);
       } catch (error) {
         console.error("Error fetching bookings:", error);
       } finally {

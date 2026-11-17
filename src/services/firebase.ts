@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, getDocs, writeBatch, doc } from "firebase/firestore";
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,23 +15,40 @@ const config = {
 
 const app = initializeApp(config);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db = getDatabase(app);
 
-/**
- * Seeds the `teachers` collection from src/data/teachers.json.
- * Idempotent: clears the collection, then writes every teacher in one batch.
- */
+export const bookTrialLesson = async (bookingData: {
+  teacherId: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  reason: string;
+  bookedAt: Date;
+}) => {
+  try {
+    const bookingsRef = ref(db, "bookings");
+    const newBookingRef = push(bookingsRef);
+    await set(newBookingRef, {
+      ...bookingData,
+      bookedAt: bookingData.bookedAt.toISOString(),
+    });
+  } catch (error) {
+    console.error("Error booking trial lesson:", error);
+    throw error;
+  }
+};
+
 export const migrateTeachersData = async (teachersData: any[]) => {
-  const batch = writeBatch(db);
-  const teachersCol = collection(db, "teachers");
-
-  const snapshot = await getDocs(teachersCol);
-  snapshot.forEach((docSnap) => batch.delete(docSnap.ref));
-
-  teachersData.forEach((teacher) => {
-    const { id, ...rest } = teacher;
-    batch.set(doc(teachersCol, id), rest);
-  });
-
-  await batch.commit();
+  try {
+    const teachersRef = ref(db, "teachers");
+    const formattedTeachers = teachersData.map((t, index) => ({
+      id: t.id || `teacher-${index + 1}`,
+      ...t,
+      lessons_done: t.lessons_done || t.lessonsDone || 0,
+    }));
+    await set(teachersRef, formattedTeachers);
+  } catch (error) {
+    console.error("Error migrating teachers data to RTDB:", error);
+    throw error;
+  }
 };

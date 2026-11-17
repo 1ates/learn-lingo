@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { db, auth } from '../services/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { ref, push, set } from 'firebase/database';
 import { Teacher } from './TeacherCard';
 import styles from './BookingModal.module.css';
 
@@ -20,6 +20,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({ teacher, isOpen, onC
 
   if (!isOpen || !teacher) return null;
 
+  const pricePerHour = teacher.pricePerHour ?? teacher.price_per_hour ?? 30;
+
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!auth.currentUser) {
@@ -34,7 +36,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({ teacher, isOpen, onC
     try {
       setLoading(true);
       setError('');
-      await addDoc(collection(db, 'bookings'), {
+      const bookingsRef = ref(db, 'bookings');
+      const newBookingRef = push(bookingsRef);
+      await set(newBookingRef, {
         userId: auth.currentUser.uid,
         userEmail: auth.currentUser.email,
         teacherId: teacher.id,
@@ -42,7 +46,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ teacher, isOpen, onC
         date,
         time,
         hours,
-        totalPrice: hours * teacher.pricePerHour,
+        totalPrice: hours * pricePerHour,
         createdAt: new Date().toISOString(),
       });
       setSuccess(true);
@@ -62,7 +66,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ teacher, isOpen, onC
       <div className={styles.modal}>
         <button onClick={onClose} className={styles.closeBtn}>×</button>
         <h2>Book a Lesson with {teacher.name} {teacher.surname}</h2>
-        <p className={styles.priceInfo}>Rate: ${teacher.pricePerHour} / hour</p>
+        <p className={styles.priceInfo}>Rate: ${pricePerHour} / hour</p>
 
         {success ? (
           <div className={styles.successMessage}>
@@ -104,7 +108,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ teacher, isOpen, onC
               />
             </div>
             <div className={styles.total}>
-              Total: ${hours * teacher.pricePerHour}
+              Total: ${hours * pricePerHour}
             </div>
             <button type="submit" disabled={loading} className={styles.submitBtn}>
               {loading ? 'Booking...' : 'Confirm Booking'}
