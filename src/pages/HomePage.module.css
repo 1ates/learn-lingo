@@ -165,7 +165,7 @@
   width: 391px;
   height: 304px;
   position: absolute;
-  bottom: 0;
+  bottom: -145px;
   display: flex;
   justify-content: center;
   align-items: flex-end;

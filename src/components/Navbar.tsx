@@ -6,6 +6,7 @@ import { AuthModal } from './AuthModal';
 export const Navbar: React.FC = () => {
   const { user, signOut, setTheme } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isThemeSubMenuOpen, setIsThemeSubMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -194,13 +195,13 @@ export const Navbar: React.FC = () => {
             ) : (
               <>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => { setAuthMode('login'); setIsModalOpen(true); }}
                   style={{ background: 'none', border: 'none', fontSize: '16px', fontWeight: 600, color: '#121417', cursor: 'pointer', padding: '8px 16px' }}
                 >
                   Log in
                 </button>
                 <button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => { setAuthMode('register'); setIsModalOpen(true); }}
                   style={{ background: '#121417', border: 'none', fontSize: '16px', fontWeight: 600, color: '#ffffff', cursor: 'pointer', padding: '12px 24px', borderRadius: '12px' }}
                 >
                   Registration
@@ -210,7 +211,7 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
       </nav>
-      <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <AuthModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} initialIsSignUp={authMode === 'register'} />
     </>
   );
 };

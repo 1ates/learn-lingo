@@ -8,6 +8,7 @@ import styles from './AuthModal.module.css';
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialIsSignUp?: boolean;
 }
 
 const getSchema = (isSignUp: boolean) => {
@@ -18,14 +19,22 @@ const getSchema = (isSignUp: boolean) => {
   }).required();
 };
 
-export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
-  const [isSignUp, setIsSignUp] = useState(false);
+export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialIsSignUp = false }) => {
+  const [isSignUp, setIsSignUp] = useState(initialIsSignUp);
   const [authError, setAuthError] = useState('');
   const { signIn, signUp } = useAuth();
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: yupResolver(getSchema(isSignUp)),
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsSignUp(!!initialIsSignUp);
+      setAuthError('');
+      reset();
+    }
+  }, [isOpen, initialIsSignUp]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
