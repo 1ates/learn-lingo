@@ -131,3 +131,14 @@
   margin-left: 0.5rem;
   text-decoration: underline;
 }
+
+.errorText {
+  color: #e53935;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.fieldError {
+  color: #e53935;
+  font-size: 12px;
+}

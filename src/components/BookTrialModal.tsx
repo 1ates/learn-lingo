@@ -89,11 +89,11 @@ export const BookTrialModal: React.FC<BookTrialModalProps> = ({ isOpen, onClose,
         </p>
 
         {teacher && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', margin: '20px 0', background: '#f8f9fa', padding: '12px', borderRadius: '12px' }}>
-            <img src={avatarUrl} alt={`${teacher.name} ${teacher.surname}`} style={{ width: '48px', height: '48px', borderRadius: '50%', objectFit: 'cover' }} />
-            <div>
-              <span style={{ fontSize: '12px', color: '#8a8a89', display: 'block' }}>Your teacher</span>
-              <strong style={{ fontSize: '16px', color: '#121417' }}>{teacher.name} {teacher.surname}</strong>
+          <div className={styles.teacherCard}>
+            <img src={avatarUrl} alt={`${teacher.name} ${teacher.surname}`} className={styles.teacherAvatar} />
+            <div className={styles.teacherInfo}>
+              <span className={styles.teacherSubtitle}>Your teacher</span>
+              <strong className={styles.teacherName}>{teacher.name} {teacher.surname}</strong>
             </div>
           </div>
         )}
@@ -101,14 +101,14 @@ export const BookTrialModal: React.FC<BookTrialModalProps> = ({ isOpen, onClose,
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <div className={styles.radioGroup}>
             <label className={styles.radioLabel}>What is your main reason for learning languages?</label>
-            <div className={styles.options} style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px' }}>
+            <div className={styles.options}>
               {[
                 'Career and business',
                 'Lesson for kids',
                 'Exams and coursework',
                 'Culture, travel or hobby'
               ].map((option) => (
-                <label key={option} className={styles.option} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '14px', color: '#121417' }}>
+                <label key={option} className={styles.option}>
                   <input
                     type="radio"
                     value={option}
@@ -118,17 +118,17 @@ export const BookTrialModal: React.FC<BookTrialModalProps> = ({ isOpen, onClose,
                 </label>
               ))}
             </div>
-            {errors.reason && <span style={{ color: 'red', fontSize: '12px', marginTop: '4px', display: 'block' }}>{errors.reason.message as string}</span>}
+            {errors.reason && <span className={styles.errorText}>{errors.reason.message as string}</span>}
           </div>
 
-          <div className={styles.inputGroup} style={{ marginTop: '16px' }}>
+          <div className={styles.inputGroup}>
             <input
               type="text"
               placeholder="Full Name"
               {...register('fullName')}
               className={styles.input}
             />
-            {errors.fullName && <span style={{ color: 'red', fontSize: '12px' }}>{errors.fullName.message as string}</span>}
+            {errors.fullName && <span className={styles.errorText}>{errors.fullName.message as string}</span>}
           </div>
 
           <div className={styles.inputGroup}>
@@ -138,7 +138,7 @@ export const BookTrialModal: React.FC<BookTrialModalProps> = ({ isOpen, onClose,
               {...register('email')}
               className={styles.input}
             />
-            {errors.email && <span style={{ color: 'red', fontSize: '12px' }}>{errors.email.message as string}</span>}
+            {errors.email && <span className={styles.errorText}>{errors.email.message as string}</span>}
           </div>
 
           <div className={styles.inputGroup}>
@@ -148,14 +148,13 @@ export const BookTrialModal: React.FC<BookTrialModalProps> = ({ isOpen, onClose,
               {...register('phone')}
               className={styles.input}
             />
-            {errors.phone && <span style={{ color: 'red', fontSize: '12px' }}>{errors.phone.message as string}</span>}
+            {errors.phone && <span className={styles.errorText}>{errors.phone.message as string}</span>}
           </div>
 
           <button
             type="submit"
             className={styles.submitButton}
             disabled={isSubmitting}
-            style={{ marginTop: '20px', width: '100%', padding: '14px', background: '#f4c550', border: 'none', borderRadius: '14px', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}
           >
             {isSubmitting ? 'Booking...' : 'Book'}
           </button>

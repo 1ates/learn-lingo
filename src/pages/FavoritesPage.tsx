@@ -4,6 +4,8 @@ import { db } from '../services/firebase';
 import { TeacherCard, Teacher } from '../components/TeacherCard';
 import { BookTrialModal } from '../components/BookTrialModal';
 import { useAuth } from '../context/AuthContext';
+import teachersFallback from '../data/teachers.json';
+import styles from './FavoritesPage.module.css';
 
 export const FavoritesPage: React.FC = () => {
   const { user } = useAuth();
@@ -16,7 +18,7 @@ export const FavoritesPage: React.FC = () => {
     const fetchFavorites = async () => {
       setLoading(true);
       try {
-        let favoriteIds: string[] = [];
+        let favoriteIds: any[] = [];
         if (user) {
           try {
             const userSnap = await get(ref(db, `users/${user.uid}/favorites`));
@@ -61,7 +63,21 @@ export const FavoritesPage: React.FC = () => {
           console.error("Error fetching teachers for favorites:", e);
         }
 
-        const favTeachers = allFetched.filter(t => favoriteIds.includes(t.id));
+        if (allFetched.length === 0) {
+          allFetched = teachersFallback.map((t: any, i: number) => ({
+            ...t,
+            id: t.id || `fallback-${i}`,
+            lessonsDone: t.lessons_done || 0,
+          }));
+        }
+
+        const favTeachers = allFetched.filter((t: any, i: number) =>
+          favoriteIds.some((favId: any) =>
+            String(favId) === String(t.id) ||
+            String(favId) === String(i) ||
+            String(favId) === String(t.name)
+          )
+        );
         setTeachers(favTeachers);
       } catch (error) {
         console.error("Error fetching favorites:", error);
@@ -79,12 +95,12 @@ export const FavoritesPage: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Roboto', sans-serif" }}>
-      <h2 style={{ fontSize: '28px', fontWeight: 700, marginBottom: '24px', color: '#121417' }}>Favorite Teachers</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Favorite Teachers</h2>
       {loading ? (
-        <p style={{ textAlign: 'center', padding: '40px', color: '#8a8a89' }}>Loading favorites...</p>
+        <p className={styles.message}>Loading favorites...</p>
       ) : teachers.length === 0 ? (
-        <p style={{ textAlign: 'center', padding: '40px', color: '#8a8a89', fontSize: '18px' }}>You haven't added any favorite teachers yet.</p>
+        <p className={styles.message}>You haven't added any favorite teachers yet.</p>
       ) : (
         <div>
           {teachers.map(teacher => (

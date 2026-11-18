@@ -98,14 +98,14 @@ export const TeachersPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.container} style={{ maxWidth: '1200px', margin: '0 auto', padding: '40px 20px', fontFamily: "'Roboto', sans-serif" }}>
-      <div className={styles.filters} style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <label style={{ fontSize: '14px', fontWeight: 500, color: '#8a8a89' }}>Languages</label>
+    <div className={styles.container}>
+      <div className={styles.filters}>
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Languages</label>
           <select
             value={selectedLanguage}
             onChange={(e) => setSelectedLanguage(e.target.value)}
-            style={{ padding: '12px 16px', borderRadius: '14px', border: 'none', background: '#ffffff', fontSize: '16px', fontWeight: 500, boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}
+            className={styles.filterSelect}
           >
             <option value="All">All Languages</option>
             <option value="English">English</option>
@@ -116,12 +116,12 @@ export const TeachersPage: React.FC = () => {
           </select>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <label style={{ fontSize: '14px', fontWeight: 500, color: '#8a8a89' }}>Level</label>
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Level</label>
           <select
             value={selectedLevel}
             onChange={(e) => setSelectedLevel(e.target.value)}
-            style={{ padding: '12px 16px', borderRadius: '14px', border: 'none', background: '#ffffff', fontSize: '16px', fontWeight: 500, boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}
+            className={styles.filterSelect}
           >
             <option value="All">All Levels</option>
             <option value="A1">A1 Beginner</option>
@@ -132,12 +132,12 @@ export const TeachersPage: React.FC = () => {
           </select>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <label style={{ fontSize: '14px', fontWeight: '500', color: '#8a8a89' }}>Price / 1 hour</label>
+        <div className={styles.filterGroup}>
+          <label className={styles.filterLabel}>Price / 1 hour</label>
           <select
             value={selectedPrice}
             onChange={(e) => setSelectedPrice(e.target.value)}
-            style={{ padding: '12px 16px', borderRadius: '14px', border: 'none', background: '#ffffff', fontSize: '16px', fontWeight: 500, boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}
+            className={styles.filterSelect}
           >
             <option value="All">Show all</option>
             <option value="25">Up to $25</option>
@@ -148,9 +148,9 @@ export const TeachersPage: React.FC = () => {
       </div>
 
       {loading ? (
-        <p style={{ textAlign: 'center', padding: '40px', color: '#8a8a89' }}>Loading teachers...</p>
+        <p className={styles.loadingMessage}>Loading teachers...</p>
       ) : teachers.length === 0 ? (
-        <p style={{ textAlign: 'center', padding: '40px', color: '#8a8a89' }}>No teachers found.</p>
+        <p className={styles.emptyMessage}>No teachers found.</p>
       ) : (
         <div className={styles.teacherList}>
           {teachers.map(teacher => (
@@ -163,7 +163,6 @@ export const TeachersPage: React.FC = () => {
         <button
           className={styles.loadMore}
           onClick={handleLoadMore}
-          style={{ display: 'block', margin: '40px auto', padding: '16px 48px', background: '#F4C550', border: 'none', borderRadius: '14px', fontWeight: 700, fontSize: '16px', cursor: 'pointer' }}
         >
           Load more
         </button>

@@ -94,7 +94,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialIs
             : 'Welcome back! Please enter your credentials to log in.'}
         </p>
 
-        {authError && <p className={styles.error} style={{ color: 'red', fontSize: '14px', marginBottom: '12px' }}>{authError}</p>}
+        {authError && <p className={styles.errorText}>{authError}</p>}
 
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {isSignUp && (
@@ -107,7 +107,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialIs
                 placeholder="Full Name"
                 className={styles.input}
               />
-              {errors.name && <span style={{ color: 'red', fontSize: '12px' }}>{errors.name.message as string}</span>}
+              {errors.name && <span className={styles.fieldError}>{errors.name.message as string}</span>}
             </div>
           )}
 
@@ -120,7 +120,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialIs
               placeholder="name@example.com"
               className={styles.input}
             />
-            {errors.email && <span style={{ color: 'red', fontSize: '12px' }}>{errors.email.message as string}</span>}
+            {errors.email && <span className={styles.fieldError}>{errors.email.message as string}</span>}
           </div>
 
           <div className={styles.field}>
@@ -132,7 +132,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialIs
               placeholder="••••••••"
               className={styles.input}
             />
-            {errors.password && <span style={{ color: 'red', fontSize: '12px' }}>{errors.password.message as string}</span>}
+            {errors.password && <span className={styles.fieldError}>{errors.password.message as string}</span>}
           </div>
 
           <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
